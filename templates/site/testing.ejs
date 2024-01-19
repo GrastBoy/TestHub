@@ -12,7 +12,7 @@
       <% items.map((item, index)=>{ %>
         <div class="question-page__item _question" data-id="<%= item.id %>" data-type="<%= item.answerType %>">
           <div class="question__index">
-            <%= item.name %>
+            <%= index + 1 %>
           </div>
 
           <div class="question__content">

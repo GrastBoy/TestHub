@@ -5,6 +5,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: "Inter", sans-serif;
+  background-color: #dedada;
 }
 li {
   list-style: none;
@@ -15,7 +16,6 @@ a {
 }
 
 .question-page {
-  background-image: url(../public/images/background-testing.jpg);
   background-attachment: fixed;
   min-height: 100%;
 }
@@ -56,7 +56,7 @@ a {
 
 /* Checked */
 .answer-content input:checked + label {
-  background: #ffe0a6;
+  background-color: #849676;
 }
 
 /* Hover */
@@ -148,16 +148,15 @@ a {
 
 .projects__link:hover .projects__description,
 .projects__link:focus .projects__description {
-  background-color: rgba(33, 149, 243, 0.324);
+  background-color: #849676;
 }
 
 .projects__description {
   padding: 20px 24px;
-  background: #ffffff;
   cursor: pointer;
+  border: 5px solid white;
   border-radius: 20px;
-  border-color: black;
-  background-color: #849676;
+  background-color: #2b3523;
 }
 
 .projects__description:hover,
@@ -169,11 +168,12 @@ a {
 }
 
 .projects__title {
+
   justify-content: center;
-  text-decoration-color: black;
+  color: rgb(255, 255, 255);
   display: flex;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 2;
   letter-spacing: 0.06em;
 }
@@ -182,18 +182,26 @@ a {
   height: 100%;
   display: flex;
   justify-content: center;
-  background-image: url(/public/images/background-testing.jpg);
+  background-color: #dedada;
 }
 
 .result-block {
+  margin-top: 30vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  text-align: center;
   height: 150px;
-  background-color: #ffffff;
-  padding: 24px;
-  border-radius: 10px;
+  padding: 50px;
+  border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 2px solid #2b3523;
   flex-direction: column;
+  cursor: pointer;
+  border: 5px solid white;
+  background-color: #2b3523;
+  color: white;
 }
+Новік Олександр Володимирович,
+керівник гуртка РМАНУМ,
+Островець Ірина Миколаївна,
+учитель математики Дубровицького ліцею Дубровицької міської ради
