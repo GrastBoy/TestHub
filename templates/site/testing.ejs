@@ -1,0 +1,163 @@
+<main class="question-page">
+  <div class="question-page__header">
+    <h1>
+      <%= subject.name %>: <%= topic.name %>
+    </h1>
+  </div>
+
+  <section>
+
+    <div class="question-page__items">
+
+      <% items.map((item, index)=>{ %>
+        <div class="question-page__item _question" data-id="<%= item.id %>" data-type="<%= item.answerType %>">
+          <div class="question__index">
+            <%= item.name %>
+          </div>
+
+          <div class="question__content">
+            <%- item.content %>
+          </div>
+
+
+          <% if(item.answerType==='single' ){ %>
+            <% item.answers.map((answer)=>{ %>
+              <div class="answer-content">
+                <input
+                  id="<%= answer.id %>"
+                  type="radio"
+                  name="question-<%= item.id %>"
+                  value="<%= answer.id %>"
+                >
+
+                <label for="<%= answer.id %>">
+                  <%= answer.name %>
+                </label>
+              </div>
+            <% }) %>
+          <% } %>
+
+          <% if(item.answerType==='text' ){ %>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <% item.answers.map((answer)=>{ %>
+                <input
+                  id="<%= answer.id %>"
+                  type="input"
+                  name="question-<%= item.id %>"
+                >
+
+                <% }) %>
+            </div>
+          <% } %>
+
+          <% if(item.answerType==='matrix' ){ %>
+            <table>
+              <thead>
+                <tr>
+                  <% headEntries=JSON.parse(item.answers[0].value).map(function([val], index) { if
+                    (index===0) { return '<th></th>' ; } return '<th>' + val + '</th>' ; }) -%>
+
+                    <%- headEntries.join("") %>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% bodyEntries=item.answers.map((answer, index)=> { const
+                  bodyItems=JSON.parse(answer.value); return '<tr>' + bodyItems.map(function([val], key) {
+                    if (key===0) { return '<td>' + val + '</td>' ; }
+
+                    return '<td><input type="radio" name="question-' + item.id + '-' + index + '"id="' + answer.id + '"></td>';
+
+                    }).join("") + '</tr>';
+
+                  }) -%>
+
+                  <%- bodyEntries.join("") %>
+              </tbody>
+            </table>
+          <% } %>
+        </div>
+      <% }) %>
+
+      <form id="submit" class="question-page__submit">
+        <input name="name" type="text" placeholder="Введіть ваше імʼя" required>
+        <button type="submit">Відправити на перевірку</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+
+<script type="text/javascript">
+  document.querySelector('#submit').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const questions = document.querySelectorAll('._question');
+
+    const data = {};
+
+    questions.forEach(function (question) {
+      const id = Number(question.dataset.id);
+      const type = question.dataset.type;
+
+      if (type === 'single') {
+        const answer = question.querySelector('input:checked');
+
+        data[id] = answer ? answer.value : null;
+      }
+
+      if (type === 'text') {
+        const answer = question.querySelector('input');
+
+        data[id] = answer ? answer.value : null;
+      }
+
+      if (type === 'matrix') {
+        const state = [];
+  
+        const rows = question.querySelectorAll('tbody tr');
+
+        rows.forEach(function (row, index) {
+          const inputs = row.querySelectorAll('input');
+
+          const result = Object.values(inputs).map((val) => {
+            return val.checked === true;
+          });
+
+          state.push(result);
+        });
+
+        data[id] = state;
+      }
+    });
+
+    submitForm({
+      name: document.querySelector('input[name="name"]').value,
+      data
+    });
+  });
+
+  function submitForm(data) {
+    console.log(data)
+
+    window
+      .fetch('/api/result', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      .then(function (response) {
+        // TODO: show success message
+        response.json().then(function (data) {
+          if (data.error) {
+            return;
+          }
+
+          // TODO: Redirect to result page
+          window.location.href = `/result/${data.resultId}`;
+        });
+      })
+    }
+</script>

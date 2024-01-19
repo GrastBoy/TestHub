@@ -1,0 +1,463 @@
+<section class="bg-white">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900">Додати нове питання</h2>
+
+    <form action="/api/question" data-method="POST">
+      <input type="hidden" name="topicId" value="<%= topicId %>">
+
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Коротка назва для питання</label>
+          <input type="text" name="name" id="name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Введіть назву" required="">
+        </div>
+      </div>
+
+      <div class="w-full mt-4">
+        <div id="editor"></div>
+      </div>
+
+      <div class="mt-4">
+        <p>Введіть кількість балів за правильну відповідь:</p>
+
+        <input type="number" name="cost" min="1"
+          class="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2"
+          placeholder="В" value="1" required="">
+      </div>
+
+      <div class="mt-4">
+        <label for="question-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Тип відповіді:
+        </label>
+
+        <select id="question-type"
+          class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="single" selected>
+            Одна правильна відповідь
+          </option>
+
+          <option value="matrix">
+            Відповідність
+          </option>
+
+          <option value="text">
+            Відкрита відповідь
+          </option>
+        </select>
+
+        <div id="answers-area"></div>
+      </div>
+
+      <!--  -->
+
+      <div class="flex gap-4 items-center mt-4 sm:mt-6">
+        <button type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+          Створити
+        </button>
+
+
+        <button type="button" onclick="window.history.back()"
+          class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
+          Назад
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script type="text/javascript">
+  const createElement = (name, value) => {
+    const element = document.createElement(name);
+
+    element.innerHTML = value;
+
+    return element.cloneNode(true);
+  }
+</script>
+
+<script type="text/javascript">
+  // FOR SINGLE TYPE
+  const singleContainerTemplate = `
+    <div data-type="single">
+      <div id="single-answers-list" class="flex flex-col gap-4 mt-4"></div>
+
+      <button type="button" id="single-answers-add-btn"
+        class="mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+        Додати варіант відповіді
+      </button>
+    </div>
+  `
+
+  let idx = 0;
+
+  const answersAddBtnFunction = () => {
+    const answersList = document.querySelector('#single-answers-list');
+
+    answersList.appendChild(createElement('div', `
+      <div id="single-answer" class="flex items-center gap-2">
+        <input type="radio" name="single-answer" id="is-answers-${idx}" value="${idx}"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5" required="">
+
+        <input type="text" name="answer-name-${idx}" id="answer-name-${idx}"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+          placeholder="Введіть відповідь" required="">
+      </div>
+    `));
+
+    idx++;
+  }
+
+  const onMountSingle = () => {
+    idx = 0;
+
+    document
+      .querySelector('#answers-area')
+      .appendChild(createElement('div', singleContainerTemplate));
+
+    document
+      .querySelector('#single-answers-add-btn')
+      .addEventListener('click', answersAddBtnFunction)
+
+    answersAddBtnFunction()
+    answersAddBtnFunction()
+  }
+
+  const onUnmountSingle = () => {
+    const answersAddBtn = document.querySelector('#single-answers-add-btn');
+
+    if (answersAddBtn) {
+      answersAddBtn.removeEventListener('click', answersAddBtnFunction)
+    }
+  }
+</script>
+
+
+<script type="text/javascript">
+  // FOR MATRIX TYPE
+
+  const matrixContainerTemplate = `
+    <div data-type="matrix">
+      <div class="flex gap-4 items-start">
+        <table class="text-xs text-center">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+            <tr></tr>
+          </tbody>
+        </table>
+
+        <button type="button" id="matrix-answers-add-column"
+          class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2">
+          +
+        </button>
+      </div>
+
+      <button type="button" id="matrix-answers-add-row"
+        class="text-white mt-4 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2">
+        Додати рядок
+      </button>
+    </div>
+  `
+
+  const prepareMatrixInput = (name) => {
+    return `
+    <input type="text" name="${name}"
+      class="bg-gray-50 w-10 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2"
+      placeholder="" required="">
+  `;
+  }
+
+  const prepareMatrixRadio = (name) => {
+    return `
+    <div class="flex items-center justify-center">
+      <input type="radio" name="${name}"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5">
+    </div>
+  `;
+  }
+
+  const matrixAnswersAddColumnFunction = () => {
+    const matrixContainerElement = document.querySelector('[data-type="matrix"]');
+
+    const matrixTableHead = matrixContainerElement.querySelector('thead')
+    const matrixTableBody = matrixContainerElement.querySelector('tbody')
+
+    const matrixColumnsLength = matrixTableHead.querySelectorAll('th').length;
+
+    matrixTableHead.querySelector('tr').appendChild(
+      createElement('th', prepareMatrixInput('column-' + (matrixColumnsLength + 1)))
+    );
+
+    matrixTableBody.querySelectorAll('tr').forEach((tr, index) => {
+      tr.appendChild(
+        createElement('td', prepareMatrixRadio('row-' + (index + 1)))
+      );
+    })
+  }
+
+  const matrixAnswersAddRowFunction = () => {
+    const matrixContainerElement = document.querySelector('[data-type="matrix"]');
+
+    const matrixTableBody = matrixContainerElement.querySelector('tbody')
+
+    const lastTableBodyRow = matrixTableBody.querySelector('tr:last-child')
+    const lastTableBodyRowClone = lastTableBodyRow.cloneNode(true)
+
+    const matrixColumnsLength = matrixTableBody.querySelectorAll('tr').length;
+
+    lastTableBodyRowClone.querySelectorAll('td').forEach((td) => {
+      const input = td.querySelector('input[type="text"]');
+      const radio = td.querySelector('input[type="radio"]');
+
+      if (radio) {
+        radio.name = 'row-' + (matrixColumnsLength + 1);
+        radio.checked = false;
+      }
+
+      if (input) {
+        input.name = 'row-' + (matrixColumnsLength + 1);
+        input.value = '';
+      }
+    })
+
+    matrixTableBody.appendChild(lastTableBodyRowClone)
+  }
+
+  const initMatrix = () => {
+    const matrixContainerElement = document.querySelector('[data-type="matrix"]');
+
+    const matrixTableBody = matrixContainerElement.querySelector('tbody')
+
+    const matrixAnswersAddColumn = document.querySelector('#matrix-answers-add-column');
+    const matrixAnswersAddRow = document.querySelector('#matrix-answers-add-row');
+
+    matrixTableBody.querySelector('tr').appendChild(
+      createElement('td', prepareMatrixInput('row-1'))
+    );
+
+    matrixAnswersAddRow.click();
+    matrixAnswersAddColumn.click();
+    matrixAnswersAddColumn.click();
+  }
+
+  const onMountMatrix = () => {
+    document
+      .querySelector('#answers-area')
+      .appendChild(
+        createElement('div', matrixContainerTemplate)
+      )
+
+    document
+      .querySelector('#matrix-answers-add-column')
+      .addEventListener('click', matrixAnswersAddColumnFunction)
+
+    document
+      .querySelector('#matrix-answers-add-row')
+      .addEventListener('click', matrixAnswersAddRowFunction)
+
+    initMatrix()
+  }
+
+  const onUnmountMatrix = () => {
+    const matrixAnswersAddColumn = document.querySelector('#matrix-answers-add-column');
+    const matrixAnswersAddRow = document.querySelector('#matrix-answers-add-row');
+
+    if (matrixAnswersAddColumn) {
+      matrixAnswersAddColumn.removeEventListener('click', matrixAnswersAddColumnFunction)
+    }
+
+    if (matrixAnswersAddRow) {
+      matrixAnswersAddRow.removeEventListener('click', matrixAnswersAddRowFunction)
+    }
+  }
+</script>
+
+<script type="text/javascript">
+  // FOR TEXT TYPE
+  const textContainerTemplate = `
+    <div data-type="text">
+      <p>Введіть правильну відповідь:</p>
+
+      <input type="text" name="text-answer"
+        class="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2"
+        placeholder="" required="">
+    </div>
+  `
+
+  onMountText = () => {
+    document
+      .querySelector('#answers-area')
+      .appendChild(createElement('div', textContainerTemplate));
+  }
+</script>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {};
+
+      data['name'] = e.target.querySelector('#name').value;
+      data['topicId'] = e.target.querySelector('input[name="topicId"]').value;
+      data['cost'] = e.target.querySelector('input[name="cost"]').value;
+      data['answerType'] = e.target.querySelector('#question-type').value;
+      data['answers'] = [];
+
+
+      if (e.target.querySelector("#editor")) {
+        data["content"] = quill.root.innerHTML;
+      }
+
+      if (e.target.querySelector('[data-type="single"]')) {
+        const answers = e.target.querySelectorAll('#single-answer');
+
+        for (const answer of answers) {
+          const isAnswer = answer.querySelector('input[type="radio"]').checked;
+          const answerValue = answer.querySelector('input[type="text"]').value;
+
+
+          data['answers'].push({
+            isAnswer,
+            name: answerValue,
+            value: null,
+          });
+        }
+      }
+
+      const formMatrixTable = e.target.querySelector('[data-type="matrix"] table');
+
+      if (formMatrixTable) {
+        // [
+        //   ['value', [['a', 'b'], ['c', 'd']]],
+        //   ['value', [['a', 'b'], ['c', 'd']]]
+        // ]
+
+        formMatrixTable.querySelector('tbody').querySelectorAll('tr').forEach((tr, index) => {
+          const row = [];
+
+          tr.querySelectorAll('td').forEach((td, index) => {
+            const input = td.querySelector('input[type="text"]');
+            const radio = td.querySelector('input[type="radio"]');
+
+
+            if (input) {
+              row.push(input.value);
+
+              return;
+            }
+
+            if (radio) {
+              const columnName = formMatrixTable.querySelector('thead').querySelectorAll('th')[index].querySelector('input[type="text"]').value;
+
+              row.push([columnName, radio.checked]);
+
+              return;
+            }
+          })
+
+          data['answers'].push({
+            isAnswer: false,
+            name: 'matrix',
+            value: JSON.stringify(row),
+          });
+        })
+      }
+
+      const formTextAnswer = e.target.querySelector('input[name="text-answer"]');
+
+      if (formTextAnswer) {
+        data['answers'].push({
+          isAnswer: false,
+          name: 'text',
+          value: formTextAnswer.value,
+        });
+      }
+
+      window
+        .fetch(e.target.action, {
+          method: e.target.dataset.method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          params: data,
+          body: JSON.stringify(data),
+        })
+        .then(function (response) {
+          // TODO: show success message
+          response.json().then(function (data) {
+            if (data.error) {
+              // TODO: show error message from response
+
+              Toastify({
+                text: data.error,
+                duration: 5000,
+                style: {
+                  background: "linear-gradient(to right, #b00000, #f00)",
+                },
+              }).showToast();
+              return;
+            }
+
+            form.reset();
+
+            window.location.href = window.location.href.replace(
+              /\/create$/,
+              ""
+            );
+          });
+        })
+        .catch(function (data) {
+          // TODO: show default error message
+          Toastify({
+            text: "Щось пішло не так",
+            duration: 5000,
+            style: {
+              background: "linear-gradient(to right, #b00000, #f00)",
+            },
+          }).showToast();
+        });
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+  const questionTypeSelect = document.querySelector('#question-type');
+
+  const onQuestionTypeSelectChange = () => {
+    onUnmountSingle();
+    onUnmountMatrix();
+
+    const selectedValue = questionTypeSelect.value;
+
+    document
+      .querySelector('#answers-area')
+      .innerHTML = '';
+
+    if (selectedValue === 'single') {
+      onMountSingle();
+    }
+
+    if (selectedValue === 'matrix') {
+      onMountMatrix();
+    }
+
+    if (selectedValue === 'text') {
+      onMountText();
+    }
+  }
+
+  questionTypeSelect.addEventListener('change', onQuestionTypeSelectChange);
+
+  onQuestionTypeSelectChange();
+</script>

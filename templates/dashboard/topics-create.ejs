@@ -1,0 +1,93 @@
+<section class="bg-white">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900">Додати нову тему</h2>
+
+    <form class="default-form" action="/api/topic" data-method="POST"
+      data-redirect-to="/dashboard/<%= subjectId %>/topics">
+      <input type="hidden" name="subjectId" value="<%= subjectId %>">
+
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Назва теми</label>
+          <input type="text" name="name" id="name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Введіть назву теми" required="">
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-center mt-4 sm:mt-6">
+        <button type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+          Створити
+        </button>
+
+
+        <button type="button" onclick="window.history.back()"
+          class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
+          Назад
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<!-- <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = {};
+      for (const [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+
+      window
+        .fetch(e.target.action, {
+          method: e.target.method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          params: data,
+          body: JSON.stringify(data),
+        })
+        .then(function (response) {
+          // TODO: show success message
+          response.json().then(function (data) {
+            if (data.error) {
+              // TODO: show error message from response
+
+              Toastify({
+                text: data.error,
+                duration: 5000,
+                style: {
+                  background: "linear-gradient(to right, #b00000, #f00)",
+                },
+              }).showToast();
+              return;
+            }
+
+            form.reset();
+
+            window.location.href = window.location.href.replace(
+              /\/create$/,
+              ""
+            );
+          });
+        })
+        .catch(function (data) {
+          // TODO: show default error message
+          Toastify({
+            text: "Щось пішло не так",
+            duration: 5000,
+            style: {
+              background: "linear-gradient(to right, #b00000, #f00)",
+            },
+          }).showToast();
+        });
+    });
+  });
+</script> -->
