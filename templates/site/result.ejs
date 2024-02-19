@@ -12,4 +12,62 @@
       Набрано балів: <%= totalPoints %>
     </p>
   </div>
+
+  <div class="question-page__items">
+    <% resultAnswers.map((item, index)=>{ %>
+      <div class="question-page__item _question" data-id="<%= item.question.id %>" data-type="<%= item.question.answerType %>">
+        <div class="question__index">
+          <%= index + 1 %>
+        </div>
+
+        <div class="question__content">
+          <%- item.question.content %>
+        </div>
+
+
+        <% if(item.question.answerType==='single' ){ %>
+          <% item.question.answers.map((answer)=>{ %>
+            <div
+              class="answer-content"
+            >
+              <input
+                id="<%= answer.id %>"
+                type="radio"
+                name="question-<%= item.question.id %>"
+                value="<%= answer.id %>"
+                readonly
+              >
+
+              <label
+                for="<%= answer.id %>"
+                style="background-color: <%= answer.__color %>;"
+              >
+                <%= answer.name %>
+              </label>
+            </div>
+          <% }) %>
+        <% } %>
+
+        <% if(item.question.answerType === 'text' ){ %>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <% item.question.answers.map((answer)=>{ %>
+              <input
+                id="<%= answer.id %>"
+                type="input"
+                name="question-<%= item.question.id %>"
+                readonly
+                value="<%= item.answer %>"
+                style="background-color: <%= answer.__color %>;"
+              >
+              <br>
+              <br>
+
+              Правильна відповідь: <%= answer.value %> 
+
+              <% }) %>
+          </div>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
 </main>

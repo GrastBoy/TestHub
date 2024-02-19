@@ -1,18 +1,510 @@
 <main class="subject-page">
-  <h1 class="subject-title">
-    <%= title %>
-  </h1>
-
-  <ul class="projects list">
-
-    <% items.map((item)=>{ %>
-      <li class="projects__item">
-        <a href="<%= item.url %>" class="link projects__link">
-          <div class="projects__description">
-            <h2 class="projects__title"><%= item.name %></h2>
-          </div>
+  <!-- Шапка сайта -->
+  <header class="header">
+    <div class="container">
+      <nav class="navigation">
+        <a href="./" class="logo link"><span class="logo__interactive">Test</span>Hub</a>
+        <ul class="list menu">
+          <li class="menu__item"><a href="./" class="link menu__nav menu__current">Головна</a></li>
+          <li class="menu__item"><a href="./tests" class="link menu__nav">Тести</a></li>
+          <li class="menu__item"><a href="" class="link menu__nav">Контакти</a></li>
+        </ul>
+        <ul class="list header-contacts">
+          <li class="header-contacts__item">
+            <a href="mailto:xbohdan.chernukx@gmail.com" class="link header-contacts__contacts">
+              <svg class="header-contacts__icon-contacts" width="16" height="12">
+                <use href="../../public/images/icons/sprite.svg#icon-envelope"></use>
+              </svg>
+              xbohdan.chernukx@gmail.com
+            </a>
+          </li>
+          <li class="header-contacts__item"><a href="tel:+380668756808" class="link header-contacts__contacts">
+              <svg class="header-contacts__icon-contacts" width="10" height="16">
+                <use href="../../public/images/icons/sprite.svg#icon-vector"></use>
+              </svg>
+              +380 66 875 68 08</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="button-mobile header__button--menu" data-menu-button>
+      <svg class="icon-mobile " aria-label="Переключатель меню">
+        <use class="menu-icon" href="../../public/images/icons/sprite.svg#menu-mobile"></use>
+        <use class="menu-close" href="../../public/images/icons/sprite.svg#close-mobile"></use>
+      </svg>
+    </button>
+  </header>
+  
+  <div class="mobile-menu" data-menu>
+    <ul class="list mobile-menu__list">
+      <li class="mobile-menu__item"><a href="./" class="link  mobile-menu__link mobail__current">Головна</a>
+      </li>
+      <li class="mobile-menu__item"><a href="./tests" class="link  mobile-menu__link">Тести</a></li>
+      <li class="mobile-menu__item"><a href="" class="link  mobile-menu__link">Контакти</a></li>
+    </ul>
+    <ul class="list mobile-contacts">
+      <li class="mobile-contacts__item"><a href="tel:+380668756808" class="link mobile-contacts__tel">
+          +38 066 875 68 08</a></li>
+      <li class="mobile-contacts__item">
+        <a href="mailto:xbohdan.chernukx@gmail.com" class="link mobile-contacts__email">
+          xbohdan.chernukx@gmail.com
         </a>
       </li>
-    <% }) %>
-  </ul>
+    </ul>
+    <ul class="social-mobile list">
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>Instagram</li>
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>Twitter</li>
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>Facebook</li>
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>LinkedIn</li>
+    </ul>
+  </div>
+  <!-- Головна інформація
+    <main>
+  
+      <!- Секція герой -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero__title">Склади НМТ/2023 на 200 тільки сьогодні!</h1>
+      <!-- <button type="button" class="hero__button" data-modal-open>Створити тест</button> -->
+      <a href="/dashboard" class="hero__button link">Створити тест</a>
+    </div>
+  </section>
+  
+  <!-- наші переваги -->
+  <section class="about-us">
+    <div class="container">
+      <h2 class="visually-hidden">Наші переваги</h2>
+      <ul class="list about-us__list">
+        <li class="about-us__item">
+          <div class="about-us__icon">
+            <svg class="icon" width="65" haighi="70">
+              <use href="../../public/images/icons/about/about-sprite.svg#icon-antenna">
+  
+              </use>
+            </svg>
+          </div>
+          <h3 class="about-us__title">Основна Ідея</h3>
+          <p class="about-us__text">
+            Сервіс за допомогою якого вчитель може створювати свої бази
+            завдань з певної теми. Сервіс має зручний та легкий інтерфейс для створення та редагування баз завдань,
+            забезпечує
+            можливість вказувати правильні відповіді для автоматичного оцінювання.
+          </p>
+        </li>
+        <li class="about-us__item">
+          <div class="about-us__icon">
+            <svg class="icon" width="70" haighi="70">
+              <use href="../../public/images/icons/about/about-sprite.svg#icon-clock">
+  
+              </use>
+            </svg>
+          </div>
+          <h3 class="about-us__title">Тестування та Аналіз Результатів</h3>
+          <p class="about-us__text">
+            Наш сайт пропонує широкий вибір тестів і практичних завдань, щоб ви могли перевірити свої знання в режимі
+            реального екзамену. Після завершення тестування ви отримаєте детальний аналіз результатів та поради щодо
+            покращення слабких місць.
+          </p>
+        </li>
+        <li class="about-us__item">
+          <div class="about-us__icon">
+            <svg class="icon" width="70" haighi="70">
+              <use href="../../public/images/icons/about/about-sprite.svg#icon-diagram">
+  
+              </use>
+            </svg>
+          </div>
+          <h3 class="about-us__title">Особистий Супровід</h3>
+          <p class="about-us__text">
+            Чернюк Богдан прагне надати особистий підхід до кожного абітурієнта. На сайті ви можете звертатися до
+            розробника і отримувати консультації, поради та відповіді на свої питання. Віримо, що індивідуальний підхід
+            допомагає краще зрозуміти матеріал та досягти високих результатів на ЗНО.
+          </p>
+        </li>
+        <li class="about-us__item">
+          <div class="about-us__icon">
+            <svg class="icon" width="70" haighi="70">
+              <use href="../../public/images/icons/about/about-sprite.svg#icon-astronaut">
+  
+              </use>
+            </svg>
+          </div>
+          <h3 class="about-us__title">Повний Курс ЗНО</h3>
+          <p class="about-us__text">
+            Сайт містить повний курс з кожного предмету ЗНО. Ви зможете знайти теоретичний матеріал, вправи, тести та
+            відеоуроки, які допоможуть вам оволодіти кожним розділом програми. Розроблений професійними вчителями та
+            досвідченими експертами, курс дозволить вам впевнено вирішувати будь-які завдання ЗНО.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Чим ми займаємось -->
+  <section class="our-work section">
+    <div class="container">
+      <h2 class="sections__title">Чим ми займаємося</h2>
+      <ul class="list our-work__list">
+        <li class="our-work__overley our-work__item">
+          <picture>
+            <source srcset="../../public/images/desktop/img-one-desktop.jpg 1x, ./images/desktop/img-one@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/img-one-tablet.jpg 1x, ./images/tablet/img-one@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/img-one-mobile.jpg 1x, ./images/mobile/img-one@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+            <img src="../../public/images/desktop/img-one-desktop.jpg" alt="Планшет на столі" width="370" />
+          </picture>
+  
+          <p class="our-works__text">Математика</p>
+        </li>
+  
+        <li class="our-work__overley our-work__item">
+          <picture>
+            <source srcset="../../public/images/desktop/img-two-desktop.jpg 1x, ../../public/images/desktop/img-two@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/img-two-tablet.jpg 1x, ../../public/images/tablet/img-two@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/img-two-mobile.jpg 1x, ../../public/images/mobile/img-two@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+            <img src="../../public/images/desktop/img-two-desktop.jpg" alt="Телефон" width="370" />
+          </picture>
+  
+          <p class="our-works__text">Фізика</p>
+        </li>
+  
+        <li class="our-work__overley our-work__item">
+          <picture>
+            <source srcset="../../public/images/desktop/img-three-desktop.jpg 1x, ../../public/images/desktop/img-three@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/img-three-tablet.jpg 1x, ../../public/images/tablet/img-three@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/img-three-mobile.jpg 1x, ../../public/images/mobile/img-three@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+            <img src="../../public/images/desktop/img-three-desktop.jpg" alt="Діаграма кольру на планшеті" width="370" />
+          </picture>
+  
+          <p class="our-works__text">Хімія</p>
+        </li>
+  
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Наша команда -->
+  <section class="our-team section">
+    <div class="container">
+      <h2 class="sections__title">Наша команда</h2>
+      <ul class="list-team list">
+        <li class="list-team__member">
+  
+          <picture>
+            <source srcset="../../public/images/desktop/igor-desktop.jpg 1x, ../../public/images/desktop/igor@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/igor-tablet.jpg 1x, ../../public/images/tablet/igor@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/igor-mobile.jpg 1x, ../../public/images/mobile/igor@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+            <img src="../../public/images/desktop/igor-desktop.jpg" alt="Product Designer" width="450" />
+          </picture>
+  
+          <div class="list-team__info">
+            <h3 class="list-team__name">Ігор Дем’яненко</h3>
+            <p class="list-team__position">Product Designer</p>
+          </div>
+          <ul class="list social-icon">
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-instagram"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-twitter"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-facebook"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-linkedin"></use>
+                </svg></a>
+            </li>
+          </ul>
+  
+        </li>
+  
+        <li class="list-team__member">
+          <picture>
+            <source srcset="../../public/images/desktop/olga-desktop.jpg 1x, ../../public/images/desktop/olga@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/olga-tablet.jpg 1x, ../../public/images/tablet/olga@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/olga-mobile.jpg 1x, ../../public/images/mobile/olga@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+  
+            <img src="../../public/images/desktop/olga-desktop.jpg" alt="Frontend Developer" width="450" />
+  
+          </picture>
+  
+          <div class="list-team__info">
+            <h3 class="list-team__name">Ольга Репіна</h3>
+            <p class="list-team__position">Frontend Developer</p>
+          </div>
+          <ul class="list social-icon">
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-instagram"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-twitter"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-facebook"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-linkedin"></use>
+                </svg></a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="list-team__member">
+          <picture>
+            <source srcset="../../public/images/desktop/mykola-desktop.jpg 1x, ../../public/images/desktop/mykola@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/mykola-tablet.jpg 1x, ../../public/images/tablet/mykola@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/mykola-mobile.jpg 1x, ../../public/images/mobile/mykola@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+  
+            <img src="../../public/images/desktop/mykola-desktop.jpg" alt="Frontend Developer" width="450" />
+  
+          </picture>
+  
+          <div class="list-team__info">
+            <h3 class="list-team__name">Микола Тарасов</h3>
+            <p class="list-team__position">Marketing</p>
+          </div>
+          <ul class="list social-icon">
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-instagram"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-twitter"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-facebook"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item"><a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-linkedin"></use>
+                </svg></a></li>
+          </ul>
+        </li>
+  
+        <li class="list-team__member">
+          <picture>
+            <source srcset="../../public/images/desktop/muhailo-desktop.jpg 1x, ../../public/images/desktop/muhailo@2x-desktop.jpg 2x"
+              media="(max-width: 1200px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/tablet/muhailo-tablet.jpg 1x, ../../public/images/tablet/muhailo@2x-tablet.jpg 2x"
+              media="(max-width: 768px)" type="image/jpeg" />
+  
+            <source srcset="../../public/images/mobile/muhailo-mobile.jpg 1x, ../../public/images/mobile/muhailo@2x-mobile.jpg 2x"
+              media="(max-width: 480px)" type="image/jpeg" />
+  
+            <img src="../../public/images/desktop/muhailo-desktop.jpg" alt="Frontend Developer" width="450" />
+  
+          </picture>
+  
+          <div class="list-team__info">
+            <h3 class="list-team__name">Михайло Єрмаков</h3>
+            <p class="list-team__position">UI Designer</p>
+          </div>
+          <ul class="list social-icon">
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank">
+                <svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-instagram"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank"><svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-twitter"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank"><svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-facebook"></use>
+                </svg></a>
+            </li>
+            <li class="social-icon__item">
+              <a href="" class="social-icon__link" target="_blank"><svg class="social-icon__icon">
+                  <use href="../../public/images/icons/sprite.svg#icon-linkedin"></use>
+                </svg></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Постійні клієнти -->
+  <section class="section">
+    <div class="container">
+      <h2 class="sections__title">Постійні клієнти</h2>
+      <ul class="list list-client">
+        <li class="list-client__item"><a href="" class="list-client__link">
+            <svg class="list-clien__icon" width="44" height="49">
+              <use href="../../public/images/icons/sprite.svg#icon-logo-1"></use>
+            </svg>
+          </a></li>
+        <li class="list-client__item"><a href="" class="list-client__link">
+            <svg class="list-clien__icon" width="40" height="52">
+              <use href="../../public/images/icons/sprite.svg#icon-logo-2"></use>
+            </svg>
+          </a></li>
+        <li class="list-client__item"><a href="" class="list-client__link">
+            <svg class="list-clien__icon" width="40" height="42">
+              <use href="../../public/images/icons/sprite.svg#icon-logo-3"></use>
+            </svg>
+          </a></li>
+        <li class="list-client__item"><a href="" class="list-client__link">
+            <svg class="list-clien__icon" width="80" height="42">
+              <use href="../../public/images/icons/sprite.svg#icon-logo-4"></use>
+            </svg>
+          </a></li>
+        <li class="list-client__item"><a href="" class="list-client__link">
+            <svg class="list-clien__icon" width="59" height="47">
+              <use href="../../public/images/icons/sprite.svg#icon-logo-5"></use>
+            </svg>
+          </a></li>
+        <li class="list-client__item"><a href="" class="list-client__link">
+            <svg class="list-clien__icon" width="90" height="45">
+              <use href="../../public/images/icons/sprite.svg#icon-logo-6"></use>
+            </svg>
+          </a></li>
+      </ul>
+    </div>
+  
+  </section>
+
+  <!-- футер -->
+  <footer class="footer">
+    <div class="container">
+      <div class="widget-blok">
+        <a href="./" class="logo-footer link"><span class="logo__interactive">Test</span>Hub</a>
+        <address>
+          <ul class="address-list list">
+            <li class="address-list__item"><a href="https://maps.app.goo.gl/TtwSkBdXwT5HQwat5"
+                class="address-list--address link" target="_blank">м.
+                Дубровиця, вулиця Нова, 114в</a></li>
+            <li class="address-list__item"><a href="mailto:info@devstudio.com"
+                class="link address-list__contacts">xbohdan.chernukx@gmail.com</a>
+            </li>
+            <li class="address-list__item"><a href="tel:+380668756808" class="link address-list__contacts">+380 66 875 68
+                08</a>
+            </li>
+          </ul>
+        </address>
+      </div>
+  
+      <div class="widget-blok">
+        <b class="join">Приєднюйтесь</b>
+        <ul class="list social-icon">
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-instagram"></use>
+              </svg></a></li>
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-twitter"></use>
+              </svg></a></li>
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-facebook"></use>
+              </svg></a></li>
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-linkedin"></use>
+              </svg></a></li>
+        </ul>
+      </div>
+  
+      <div class="widget-blok ">
+        <b class="join">Підпишіться на розсилку</b>
+        <form class="footer-form">
+          <label>
+            <input type="email" name="email" placeholder="E-mail" novalidate class="footer-form__input" />
+          </label>
+          <button type="submit" class="footer-form__button">
+            Підписатися
+            <svg class="footer-form__icon" width="24" height="24">
+              <use href="../../public/images/icons/sprite.svg#icon-send"></use>
+            </svg>
+          </button>
+        </form>
+  
+      </div>
+  </footer>
+  
+  <!-- modal -->
+  
+  
+  
+  <script type="text/javascript">
+    (() => {
+        const menuBtnRef = document.querySelector("[data-menu-button]");
+        const mobileMenuRef = document.querySelector("[data-menu]");
+        menuBtnRef.addEventListener("click", () => {
+          const expanded =
+            menuBtnRef.getAttribute("aria-expanded") === "true" || false;
+          menuBtnRef.classList.toggle("is-open");
+          menuBtnRef.setAttribute("aria-expanded", !expanded);
+          mobileMenuRef.classList.toggle("is-open");
+        });
+      })();
+  </script>
+
 </main>
+
+
+

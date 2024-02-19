@@ -1,0 +1,145 @@
+/* < !-- Шапка сайта --> */
+
+.header {
+    // position: sticky;
+    // z-index: 2;
+    // background-color: #fff;
+    // top: 0;
+    border-bottom: 1px solid #ECECEC;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+   
+}
+
+/* logo */
+.logo {
+    font-weight: 700;
+    padding-top: 24px;
+    padding-bottom: 25px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 26px;
+    line-height: 1.19;
+    color: #000000;
+}
+
+.logo__interactive {
+color: var(--accent-color);
+    @media screen and (max-width: 768px){
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    &:hover,
+    &:focus {
+            color: var(--accent-color);
+        }
+}
+
+
+.menu {
+    @media screen and (max-width: 767.98px) {
+           display: none;
+        }
+                 @media screen and (max-width: 768px){
+margin-left: 89px;
+                 }
+    display: flex;
+    margin-left: 94px;
+}
+
+.menu__item {
+    margin-right: 55px;
+}
+
+.menu__item:last-child {
+    margin-right: 0px;
+}
+
+.menu__nav {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 0.02em;
+    color: var(--primary-text-color);
+}
+
+/* Псевтоелемент */
+.menu__current {
+    position: relative;
+
+    padding-top: 32px;
+    padding-bottom: 32px;
+    color: var(--accent-color);
+}
+
+.menu__current::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent-color);
+}
+
+/*  */
+
+.header-contacts {
+        display: flex;
+        margin-left: auto;
+    @media screen and (min-width: 320px) and (max-width:767.88px) {
+        .header-contacts__item{
+         display: none;
+        }      
+    }
+    @media screen and (min-width: 768px) and (max-width:1198.88px) {
+            // display: inline;
+            margin-left: 50px;
+        flex-direction: column;
+         }
+     @media screen and (min-width: 768px) and (max-width:1198.88px){
+       .header-contacts__item {
+        margin: 0px;
+    }
+ }
+               
+   
+}
+
+.header-contacts__item {
+    margin-right: 50px;
+}               
+                
+
+.header-contacts__item:last-child {
+    margin-right: 0px; 
+               
+ }
+    
+
+
+.header-contacts__contacts {
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    color: var(--secondary-text-color);
+}
+
+.header-contacts__icon-contacts {
+    margin-right: 10px;
+    fill: currentColor;
+   @media screen and (min-width: 768px) and (max-width:1198.88px){
+   margin-right: 5px;
+  }
+}
+
+
+

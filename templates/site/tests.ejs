@@ -1,0 +1,178 @@
+<main class="subject-page">
+  <header class="header header-container">
+    <div class="container">
+      <nav class="navigation">
+        <a href="./" class="logo link"><span class="logo__interactive">Test</span>Hub</a>
+        <ul class="list menu">
+          <li class="menu__item"><a href="./" class="link menu__nav ">Головна</a></li>
+          <li class="menu__item"><a href="./tests" class="link menu__nav menu__current">Тести</a></li>
+          <li class="menu__item"><a href="" class="link menu__nav">Контакти</a></li>
+        </ul>
+        <ul class="list header-contacts">
+          <li class="header-contacts__item">
+            <a href="mailto:xbohdan.chernukx@gmail.com" class="link header-contacts__contacts">
+              <svg class="header-contacts__icon-contacts" width="16" height="12">
+                <use href="../../public/images/icons/sprite.svg#icon-envelope"></use>
+              </svg>
+              xbohdan.chernukx@gmail.com
+            </a>
+          </li>
+          <li class="header-contacts__item"><a href="tel:+380961111111" class="link header-contacts__contacts">
+              <svg class="header-contacts__icon-contacts" width="10" height="16">
+                <use href="../../public/images/icons/sprite.svg#icon-vector"></use>
+              </svg>
+              +380 66 875 68 08</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="button-mobile" data-menu-button>
+      <svg class="icon-mobile " aria-label="Переключатель меню">
+        <use class="menu-icon" href="../../public/images/icons/sprite.svg#menu-mobile"></use>
+        <use class="menu-close" href="../../public/images/icons/sprite.svg#close-mobile"></use>
+      </svg>
+    </button>
+  </header>
+  
+  <div class="mobile-menu" data-menu>
+    <ul class="list mobile-menu__list">
+      <li class="mobile-menu__item"><a href="./" class="link  mobile-menu__link ">Головна</a>
+      </li>
+      <li class="mobile-menu__item"><a href="./tests"
+          class="link  mobile-menu__link mobail__current">Тести</a></li>
+      <li class="mobile-menu__item"><a href="" class="link  mobile-menu__link">Контакти</a></li>
+    </ul>
+    <ul class="list mobile-contacts">
+      <li class="mobile-contacts__item"><a href="tel:+380668756808" class="link mobile-contacts__tel">
+          +38 066 875 68 08</a></li>
+      <li class="mobile-contacts__item">
+        <a href="mailto:xbohdan.chernukx@gmail.com" class="link mobile-contacts__email">
+          xbohdan.chernukx@gmail.com
+        </a>
+      </li>
+    </ul>
+    <ul class="social-mobile list">
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>Instagram</li>
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>Twitter</li>
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>Facebook</li>
+      <li class="social-mobile__item"><a class="social-mobile__link" href=""></a>LinkedIn</li>
+    </ul>
+  </div>
+  
+  <!--Контент сайта портфоліо-->
+  
+    <!-- Секція з кнопками і роботами -->
+    <section class="section">
+      <div class="container">
+        <!-- Заголовок скритий за допомогою css -->
+        <h1 class="visually-hidden">Наші роботи</h1>
+  
+        <!-- Список з кнопками -->
+        <ul class="filter-menu list">
+          <li class="filter-menu__item"><a href="/tests" class="filter-menu__button" type="button">Усе</a></li>
+          <% subjects.map((item)=>{ %>
+            <li class="filter-menu__item">
+              <a href="<%= item.url %>" class="filter-menu__button" type="button">
+                <%= item.name %>
+              </a>
+            </li>
+            <% }) %>
+        </ul>
+  
+        <!--  Наші проекти -->
+        <ul class="projects list">
+          <% items.map((item)=>{ %>
+            <li class="projects__item">
+              <a href="<%= item.url %>" class="link projects__link">
+                <div class="projects__description">
+                  <h2 class="projects__title">
+                    <%= item.name %>
+                  </h2>
+        
+                  <p class="projects__product">
+                    Кількість питань: <%= item.questionsCount %>
+                  </p>
+                </div>
+              </a>
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+    </section>
+
+  
+  <!--Підвал сайта, іноформація -->
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="widget-blok">
+        <a href="./" class="logo-footer link"><span class="logo__interactive">Test</span>Hub</a>
+        <address>
+          <ul class="address-list list">
+            <li class="address-list__item"><a href="https://maps.app.goo.gl/TtwSkBdXwT5HQwat5"
+                class="address-list--address link" target="_blank">м.
+                Дубровиця, вулиця Нова, 114в</a></li>
+            <li class="address-list__item"><a href="mailto:info@devstudio.com"
+                class="link address-list__contacts">xbohdan.chernukx@gmail.com</a>
+            </li>
+            <li class="address-list__item"><a href="tel:+380668756808" class="link address-list__contacts">+380 66 875 68
+                08</a>
+            </li>
+          </ul>
+        </address>
+      </div>
+  
+      <div class="widget-blok">
+        <b class="join">Приєднюйтесь</b>
+        <ul class="list social-icon">
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-instagram"></use>
+              </svg></a></li>
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-twitter"></use>
+              </svg></a></li>
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-facebook"></use>
+              </svg></a></li>
+          <li class="social-icon__item"><a href="" class="footer-icon__link" target="_blank"><svg
+                class="social-icon__icon">
+                <use href="../../public/images/icons/sprite.svg#icon-linkedin"></use>
+              </svg></a></li>
+        </ul>
+      </div>
+  
+      <div class="widget-blok ">
+        <b class="join">Підпишіться на розсилку</b>
+        <form class="footer-form">
+          <label>
+            <input type="email" name="email" placeholder="E-mail" novalidate class="footer-form__input" />
+          </label>
+          <button type="submit" class="footer-form__button">
+            Підписатися
+            <svg class="footer-form__icon" width="24" height="24">
+              <use href="../../public/images/icons/sprite.svg#icon-send"></use>
+            </svg>
+          </button>
+        </form>
+  
+      </div>
+  </footer>
+  <script type="text/javascript">
+    (() => {
+      const menuBtnRef = document.querySelector("[data-menu-button]");
+      const mobileMenuRef = document.querySelector("[data-menu]");
+      menuBtnRef.addEventListener("click", () => {
+        const expanded =
+          menuBtnRef.getAttribute("aria-expanded") === "true" || false;
+        menuBtnRef.classList.toggle("is-open");
+        menuBtnRef.setAttribute("aria-expanded", !expanded);
+        mobileMenuRef.classList.toggle("is-open");
+      });
+    })();
+  </script>
+</main>
+
+
+

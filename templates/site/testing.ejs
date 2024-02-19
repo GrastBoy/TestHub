@@ -1,9 +1,40 @@
 <main class="question-page">
-  <div class="question-page__header">
-    <h1>
-      <%= subject.name %>: <%= topic.name %>
-    </h1>
-  </div>
+
+
+  <header class="header header-container">
+    <div class="container">
+      <nav class="navigation">
+        <a href="./" class="logo link"><span class="logo__interactive">Test</span>Hub</a>
+        <ul class="list menu">
+          <li class="menu__item"><a href="./" class="link menu__nav ">Головна</a></li>
+          <li class="menu__item"><a href="./tests" class="link menu__nav menu__current">Тести</a></li>
+          <li class="menu__item"><a href="" class="link menu__nav">Контакти</a></li>
+        </ul>
+        <ul class="list header-contacts">
+          <li class="header-contacts__item">
+            <a href="mailto:xbohdan.chernukx@gmail.com" class="link header-contacts__contacts">
+              <svg class="header-contacts__icon-contacts" width="16" height="12">
+                <use href="../../public/images/icons/sprite.svg#icon-envelope"></use>
+              </svg>
+              xbohdan.chernukx@gmail.com
+            </a>
+          </li>
+          <li class="header-contacts__item"><a href="tel:+380961111111" class="link header-contacts__contacts">
+              <svg class="header-contacts__icon-contacts" width="10" height="16">
+                <use href="../../public/images/icons/sprite.svg#icon-vector"></use>
+              </svg>
+              +380 66 875 68 08</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="button-mobile" data-menu-button>
+      <svg class="icon-mobile " aria-label="Переключатель меню">
+        <use class="menu-icon" href="../../public/images/icons/sprite.svg#menu-mobile"></use>
+        <use class="menu-close" href="../../public/images/icons/sprite.svg#close-mobile"></use>
+      </svg>
+    </button>
+  </header>
+
 
   <section>
 
